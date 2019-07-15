@@ -1,0 +1,49 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/ColorPickerTheme"
+                android:layout_centerHorizontal="true"
+                android:padding="16dp"
+                tools:context="net.hangyas.antpaint.app.ColorPicker">
+
+    <com.larswerkman.holocolorpicker.ColorPicker
+            android:id="@+id/picker"
+            android:layout_gravity="center"
+            android:layout_centerHorizontal="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    <com.larswerkman.holocolorpicker.SaturationBar
+            android:layout_below="@id/picker"
+            android:id="@+id/saturationbar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"/>
+
+    <com.larswerkman.holocolorpicker.ValueBar
+            android:layout_below="@id/saturationbar"
+            android:id="@+id/valuebar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"/>
+
+    <Button
+            android:id="@+id/ok"
+            android:layout_below="@id/valuebar"
+            android:layout_alignParentRight="true"
+            android:text="ok"
+            android:onClick="ok"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    <Button
+            android:id="@+id/cancel"
+            android:text="cancel"
+            android:onClick="cancel"
+            android:layout_below="@id/valuebar"
+            android:layout_toLeftOf="@id/ok"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+</RelativeLayout>

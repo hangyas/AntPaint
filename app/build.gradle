@@ -1,0 +1,58 @@
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath "com.android.tools.build:gradle:1.2.3"
+        classpath "jp.leafytree.gradle:gradle-android-scala-plugin:1.4"
+    }
+}
+apply plugin: "com.android.application"
+apply plugin: "jp.leafytree.android-scala"
+
+repositories {
+    jcenter()
+    mavenCentral()
+}
+
+android {
+    compileSdkVersion 22
+    buildToolsVersion "22.0.1"
+
+    defaultConfig {
+        applicationId "net.hangyas.antpaint.app"
+        minSdkVersion 14
+        targetSdkVersion 21
+        multiDexEnabled true
+        testInstrumentationRunner "com.android.test.runner.MultiDexTestRunner"
+    }
+
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_6
+        targetCompatibility JavaVersion.VERSION_1_6
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    compile 'com.android.support:appcompat-v7:22.2.0'
+    compile 'com.android.support:support-v4:22.2.0'
+    compile 'org.scala-lang:scala-library:2.11.7'
+    compile 'com.android.support:multidex:1.0.0'
+    compile 'com.google.android.gms:play-services-ads:7.5.0'
+
+    compile 'com.facebook.android:facebook-android-sdk:4.0.0'
+
+    compile 'com.github.clans:fab:1.5.3'
+    compile 'com.larswerkman:HoloColorPicker:1.5'
+
+    //file feltoltes
+    compile 'com.loopj.android:android-async-http:1.4.5'
+
+}

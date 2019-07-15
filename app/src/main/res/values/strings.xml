@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">AntPaint</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_color_picker">ColorPicker</string>
+
+    <string name="ad_id">ca-app-pub-8746713487819525/6111451525</string>
+    <string name="facebook_app_id">1594536180826197</string>
+</resources>

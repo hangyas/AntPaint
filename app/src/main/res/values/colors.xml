@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="primary" type="color">#ffba00</item>
+    <item name="primary_dark" type="color">#fb9e01</item>
+    <item name="accent" type="color">#cddc39</item>
+    <item name="accent_blue" type="color">#0098CB</item>
+    <item name="light" type="color">#fff9c4</item>
+</resources>

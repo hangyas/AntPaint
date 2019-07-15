@@ -1,0 +1,215 @@
+<RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:fab="http://schemas.android.com/apk/res-auto"
+        xmlns:ads="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".MainActivity">
+
+        <net.hangyas.antpaint.app.AntCanvas
+                android:id="@+id/canvas"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"/>
+
+        <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:minHeight="?attr/actionBarSize"
+                android:elevation="4dp"
+                android:theme="@style/AppTheme.ActionBar"
+                app:popupTheme="@style/AppTheme.Popup"
+                android:popupTheme="@style/AppTheme.Popup"/>
+
+
+        <com.github.clans.fab.FloatingActionButton
+                android:id="@+id/gui_shower"
+                android:src="@drawable/dot"
+                android:onClick="showGui"
+                android:visibility="invisible"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
+                android:scaleType="fitCenter"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                fab:fab_colorPressed="@color/accent"
+                fab:fab_colorNormal="@color/accent"/>
+
+        <RelativeLayout
+                android:id="@+id/gui"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
+
+                <include
+                        layout="@layout/messenger_button_send_blue_round"
+                        android:layout_alignParentBottom="true"
+                        android:layout_centerHorizontal="true"
+                        android:layout_width="58dp"
+                        android:layout_height="59dp"
+                        android:layout_marginBottom="4dp"
+                        />
+
+                <com.google.android.gms.ads.AdView
+                        android:id="@+id/ad_view"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="?android:attr/actionBarSize"
+                        ads:adSize="BANNER"
+                        ads:adUnitId="@string/ad_id" />
+
+                <!-- color -->
+
+                <com.github.clans.fab.FloatingActionMenu
+                        android:id="@+id/color_menu"
+                        android:src="@drawable/feltpen"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentBottom="true"
+                        fab:menu_colorPressed="#fff"
+                        fab:menu_icon="@drawable/nobg"
+                        fab:menu_labels_style="@style/menu_labels_style"
+                        fab:menu_animationDelayPerItem="0">
+
+                        <com.github.clans.fab.FloatingActionButton
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:onClick="startColorPicker"
+                                android:src="@drawable/palette"
+                                fab:fab_colorPressed="#fff"
+                                fab:fab_colorNormal="#000"/>
+
+                </com.github.clans.fab.FloatingActionMenu>
+
+                <!-- tool -->
+
+                <net.hangyas.antpaint.app.LockableScrollView
+                        android:id="@+id/tool_scroll"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentBottom="true"
+                        android:paddingTop="?android:attr/actionBarSize"
+                        android:scrollbars="none">
+
+                        <com.github.clans.fab.FloatingActionMenu
+                                android:id="@+id/tool_menu"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentRight="true"
+                                android:layout_alignParentBottom="true"
+                                fab:menu_labels_style="@style/menu_labels_style"
+                                fab:menu_colorNormal="@color/accent"
+                                fab:menu_colorPressed="@color/accent"
+                                fab:menu_icon="@drawable/tools"
+                                fab:menu_labels_position="left"
+                                fab:menu_animationDelayPerItem="0">
+
+                                <com.github.clans.fab.FloatingActionButton
+                                        android:id="@+id/set_chain"
+                                        android:src="@drawable/chain"
+                                        android:onClick="toolClick"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        fab:fab_label="Chain"
+                                        fab:fab_colorNormal="@color/accent_blue"
+                                        fab:fab_colorDisabled="@color/accent_blue"
+                                        fab:fab_colorPressed="@color/accent_blue"/>
+
+                                <com.github.clans.fab.FloatingActionButton
+                                        android:id="@+id/set_grid"
+                                        android:src="@drawable/grid"
+                                        android:onClick="toolClick"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        fab:fab_label="Grid"
+                                        fab:fab_colorNormal="@color/accent_blue"
+                                        fab:fab_colorDisabled="@color/accent_blue"
+                                        fab:fab_colorPressed="@color/accent_blue"/>
+
+                                <com.github.clans.fab.FloatingActionButton
+                                        android:id="@+id/set_wave"
+                                        android:src="@drawable/wave"
+                                        android:onClick="toolClick"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        fab:fab_label="Wave"
+                                        fab:fab_colorNormal="@color/accent_blue"
+                                        fab:fab_colorDisabled="@color/accent_blue"
+                                        fab:fab_colorPressed="@color/accent_blue"/>
+
+                                <com.github.clans.fab.FloatingActionButton
+                                        android:id="@+id/set_spray"
+                                        android:src="@drawable/spray"
+                                        android:onClick="toolClick"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        fab:fab_label="Spray"
+                                        fab:fab_colorNormal="@color/accent_blue"
+                                        fab:fab_colorDisabled="@color/accent_blue"
+                                        fab:fab_colorPressed="@color/accent_blue"/>
+
+
+                                <com.github.clans.fab.FloatingActionButton
+                                        android:id="@+id/set_scribble"
+                                        android:src="@drawable/scribble"
+                                        android:onClick="toolClick"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        fab:fab_label="Scribble"
+                                        fab:fab_colorNormal="@color/accent_blue"
+                                        fab:fab_colorDisabled="@color/accent_blue"
+                                        fab:fab_colorPressed="@color/accent_blue"/>
+
+                                <com.github.clans.fab.FloatingActionButton
+                                        android:id="@+id/set_pen"
+                                        android:src="@drawable/pen"
+                                        android:onClick="toolClick"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        fab:fab_label="Pen"
+                                        fab:fab_colorNormal="@color/accent_blue"
+                                        fab:fab_colorDisabled="@color/accent_blue"
+                                        fab:fab_colorPressed="@color/accent_blue"/>
+
+                                <com.github.clans.fab.FloatingActionButton
+                                        android:id="@+id/set_feltpen"
+                                        android:src="@drawable/feltpen"
+                                        android:onClick="toolClick"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        fab:fab_label="Feltpen"
+                                        fab:fab_colorNormal="@color/accent_blue"
+                                        fab:fab_colorDisabled="@color/accent_blue"
+                                        fab:fab_colorPressed="@color/accent_blue"/>
+
+                                <com.github.clans.fab.FloatingActionButton
+                                        android:id="@+id/set_water_paint"
+                                        android:src="@drawable/water_paint"
+                                        android:onClick="toolClick"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        fab:fab_label="Water paint"
+                                        fab:fab_colorNormal="@color/accent_blue"
+                                        fab:fab_colorDisabled="@color/accent_blue"
+                                        fab:fab_colorPressed="@color/accent_blue"/>
+
+                                <com.github.clans.fab.FloatingActionButton
+                                        android:id="@+id/set_eraser"
+                                        android:src="@drawable/eraser"
+                                        android:onClick="toolClick"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        fab:fab_label="Eraser"
+                                        fab:fab_colorNormal="@color/accent_blue"
+                                        fab:fab_colorDisabled="@color/accent_blue"
+                                        fab:fab_colorPressed="@color/accent_blue"/>
+
+                        </com.github.clans.fab.FloatingActionMenu>
+                </net.hangyas.antpaint.app.LockableScrollView>
+
+        </RelativeLayout>
+</RelativeLayout>
