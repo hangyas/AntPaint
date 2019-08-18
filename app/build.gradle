@@ -16,6 +16,10 @@ repositories {
 }
 
 android {
+    lintOptions {
+        abortOnError false
+    }
+
     compileSdkVersion 22
     buildToolsVersion "22.0.1"
 
@@ -45,14 +49,7 @@ dependencies {
     compile 'com.android.support:support-v4:22.2.0'
     compile 'org.scala-lang:scala-library:2.11.7'
     compile 'com.android.support:multidex:1.0.0'
-    compile 'com.google.android.gms:play-services-ads:7.5.0'
-
-    compile 'com.facebook.android:facebook-android-sdk:4.0.0'
 
     compile 'com.github.clans:fab:1.5.3'
     compile 'com.larswerkman:HoloColorPicker:1.5'
-
-    //file feltoltes
-    compile 'com.loopj.android:android-async-http:1.4.5'
-
 }

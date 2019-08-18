@@ -27,8 +27,9 @@ public class ColorPicker extends ActionBarActivity {
         picker = (com.larswerkman.holocolorpicker.ColorPicker)findViewById(R.id.picker);
         sBar = (SaturationBar)findViewById(R.id.saturationbar);
         vBar = (ValueBar)findViewById(R.id.valuebar);
-
+        
         int lastColor = intent.getIntExtra("lastColor", 0);
+
         picker.setOldCenterColor(lastColor);
         picker.addSaturationBar(sBar);
         picker.addValueBar(vBar);

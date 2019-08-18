@@ -15,21 +15,6 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name">
 
-        <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
-
-        <activity android:name="com.facebook.FacebookActivity"
-                  android:configChanges=
-                          "keyboard|keyboardHidden|screenLayout|screenSize|orientation"
-                  android:theme="@android:style/Theme.Translucent.NoTitleBar"
-                  android:label="@string/app_name" />
-        <provider android:authorities="com.facebook.app.FacebookContentProvider1594536180826197"
-                  android:name="com.facebook.FacebookContentProvider"
-                  android:exported="true" />
-
-        <meta-data android:name="com.google.android.gms.version"
-                   android:value="@integer/google_play_services_version" />
-
-
         <activity
             android:theme="@style/AppTheme"
             android:name=".MainActivity"
@@ -38,12 +23,6 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-
-            <intent-filter>
-                <action android:name="android.intent.action.PICK"/>
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="com.facebook.orca.category.PLATFORM_THREAD_20150314" />
             </intent-filter>
 
             <intent-filter>
@@ -73,10 +52,6 @@
                 android:value="net.hangyas.antpaint.app.MainActivity" />
         </activity>
 
-
-        <activity android:name="com.google.android.gms.ads.AdActivity"
-                  android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
-                  android:theme="@android:style/Theme.Translucent" />
 
     </application>
 

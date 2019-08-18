@@ -21,13 +21,8 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.*;
 import android.widget.*;
-import com.facebook.appevents.AppEventsLogger;
 import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
-import com.facebook.messenger.MessengerUtils;
-import com.facebook.messenger.MessengerThreadParams;
 
 import java.io.File;
 
@@ -39,21 +34,16 @@ public class MainActivity extends AppCompatActivity {
     static final int REQUEST_COLOR_PICKER = 1;
     static final int REQUEST_IMAGE_GET = 2;
 
-    //messenger
-    MessengerThreadParams messengerThreadParams;
-    boolean messengerPicking = false;
     //gui elemek
     AntCanvas antCanvas;
     FloatingActionMenu colorMenu;
     FloatingActionMenu toolMenu;
     RelativeLayout gui;
-    View messengerBtn;
     PopupMenu popup;
     ImageButton guiShower;
     ProgressDialog progressDialog;
     LockableScrollView toolScroll;
     ActionBar actionBar;
-    AdView adView;
     android.support.v7.widget.Toolbar toolbar;
 
     private static final int guiShowerDelay = 40;
@@ -207,7 +197,6 @@ public class MainActivity extends AppCompatActivity {
         gui = (RelativeLayout) findViewById(R.id.gui);
         guiShower = (ImageButton) findViewById(R.id.gui_shower);
         toolScroll = (LockableScrollView) findViewById(R.id.tool_scroll);
-        adView = (AdView) findViewById(R.id.ad_view);
 
         for (int i = 0; i < colors.length; ++i){
             FloatingActionButton btn = new FloatingActionButton(getBaseContext());
@@ -232,42 +221,9 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        //admob
-
-        AdRequest.Builder adReqBuilder = new AdRequest.Builder();
-//        adReqBuilder.addTestDevice(AdRequest.DEVICE_ID_EMULATOR);//"EA189C07067C159A194D92C2A9481B9A"); //TODO REKLÁM !!!!!!!
-//        adReqBuilder.addTestDevice("EA189C07067C159A194D92C2A9481B9A");
-        AdRequest adRequest = adReqBuilder.build();
-        adView.loadAd(adRequest);
-
-        //messenger
-
-        messengerBtn = findViewById(R.id.messenger_send_button);
+        //képmegynitás más appokból
 
         Intent intent = getIntent();
-        if (Intent.ACTION_PICK.equals(intent.getAction())) {
-
-            messengerThreadParams = MessengerUtils.getMessengerThreadParamsForIntent(intent);
-            messengerPicking = true;
-
-            if (messengerThreadParams != null) {
-                try {
-                    ShareUtils.loadFromJSON(messengerThreadParams.metadata, antCanvas);
-                } catch (Exception e) {
-                    msg("Failed to load image (2)");
-                    e.printStackTrace();
-                }
-            }
-        }
-
-        messengerBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ShareUtils.shareToMessenger(antCanvas);
-            }
-        });
-
-        //képmegynitás más appokból
 
         if (Intent.ACTION_SEND.equals(intent.getAction())){
             ShareUtils.openImage(antCanvas, getFilePath((Uri) intent.getExtras().get(Intent.EXTRA_STREAM)));
@@ -314,11 +270,6 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu){
-        if (messengerPicking){
-            MenuItem shareItem = menu.findItem(R.id.action_share);
-            menu.removeItem(shareItem.getItemId());
-        }
-
         MenuItem undoItem = menu.findItem(R.id.action_undo);
         undoItem.getIcon().setAlpha(HistoryManager.canUndo() ? 255 : 127);
 
@@ -365,13 +316,11 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        AppEventsLogger.activateApp(this);
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        AppEventsLogger.deactivateApp(this);
     }
 
     public static void showLoading(){

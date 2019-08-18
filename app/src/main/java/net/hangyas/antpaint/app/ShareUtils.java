@@ -8,8 +8,6 @@ import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
-import com.facebook.messenger.MessengerUtils;
-import com.facebook.messenger.ShareToMessengerParams;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -35,56 +33,6 @@ public class ShareUtils {
         intent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(file));
         intent.setType("image/jpeg");
         MainActivity.self.startActivity(Intent.createChooser(intent, "share"));
-    }
-
-    static void shareToMessenger(AntCanvas antCanvas) {
-        MainActivity.msg("processing...");
-        String id = UUID.randomUUID().toString();
-        String metadata = "";
-
-        File asd;
-        //továbbrajzolható formátum mentése és feltöltése
-        //id-t berakjuk a metadataba
-        try {
-            asd = save(antCanvas, getAntCanvasFile(id));
-        } catch (Exception e) {
-            MainActivity.msg(e.getMessage() + "-2 Failed to share via Messenger (use share instead)");
-            e.printStackTrace();
-            return;
-        }
-        try {
-            AcStore.upload(id, asd);
-        } catch (Exception e) {
-            MainActivity.msg(e.getMessage() + "-1 Failed to share via Messenger (use share instead)");
-            e.printStackTrace();
-            return;
-        }
-        try {
-            metadata = makeJSON(id);
-        } catch (Exception e) {
-            MainActivity.msg(e.getMessage() + " - Failed to share via Messenger (use share instead)");
-            e.printStackTrace();
-            return;
-        }
-
-        //csinálunk belőle egy képet amit a messenger kirajzol
-        File imgFile = export(antCanvas);
-
-        // contentUri points to the content being shared to Messenger
-        ShareToMessengerParams shareToMessengerParams =
-                ShareToMessengerParams.newBuilder(Uri.fromFile(imgFile), "image/jpeg")
-                        .setMetaData(metadata)
-                        .build();
-
-        // Sharing from an Activity
-        if (MainActivity.self.messengerPicking) {
-            MessengerUtils.finishShareToMessenger(MainActivity.self, shareToMessengerParams);
-        }else{
-            MessengerUtils.shareToMessenger(
-                    MainActivity.self,
-                    REQUEST_CODE_SHARE_TO_MESSENGER,
-                    shareToMessengerParams);
-        }
     }
 
     /**
@@ -227,13 +175,4 @@ public class ShareUtils {
         return metadata.toString();
     }
 
-    /**
-     * kimentett json beolvasása
-     * be is álílt mindent mert nem lehet értelmesen visszadni
-     * */
-    static void loadFromJSON(String json, AntCanvas antCanvas) throws JSONException, IOException {
-        JSONObject metadata = new JSONObject(json);
-
-        AcStore.get(metadata.getString("id"));
-    }
 }
